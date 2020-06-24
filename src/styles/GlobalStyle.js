@@ -4,13 +4,39 @@ const GlobalStyle = createGlobalStyle`
  
 :root {
   --border-radius-size: 4px;
-  --main-orange: #f97f51;
+  --main-color: #08d9d6;
+  --secondary-color: #eb4d4b;
+  --dark-color: #252a34;
+  --light-color: #eaeaea;
+
 }
 
-  html {
+${
+	'' /* .color {
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: 1rem 3rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  margin: 2rem auto;
+  display: block;
+} */
+}
+
+html {
   box-sizing: border-box;
-  font-size: 16px;
+}
+
+body {
   font-family: 'Open Sans', sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
 }
 
 *, *:before, *:after {
