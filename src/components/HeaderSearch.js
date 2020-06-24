@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
+
+import { JobsContext } from '../context/GlobalState';
 
 const Form = styled.form`
 	display: flex;
@@ -30,13 +32,16 @@ const SearchButton = styled.button`
 const HeaderSearch = ({ placeholder = 'Buscar trabajos' }) => {
 	const [search, setSearch] = useState('');
 
+	const { handleSearch } = useContext(JobsContext);
+
 	const onChange = event => {
 		setSearch(event.target.value);
 	};
 
 	const handleSubmit = event => {
 		event.preventDefault();
-		console.log(search);
+		handleSearch(search);
+		setSearch('');
 	};
 
 	return (
@@ -44,7 +49,7 @@ const HeaderSearch = ({ placeholder = 'Buscar trabajos' }) => {
 			<Input type="text" aria-label="buscar trabajos" placeholder={placeholder} value={search} onChange={onChange} />
 			<SearchButton type="submit">
 				<svg
-					aria-label="search button"
+					aria-label="botón buscar"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 					fill="black"

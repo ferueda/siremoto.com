@@ -1,14 +1,19 @@
 import React from 'react';
 import GlobalStyle from './styles/GlobalStyle';
-import Header from './components/Header';
 
-function App() {
+import GlobalState from './context/GlobalState';
+
+import Header from './components/Header';
+import JobList from './components/JobList';
+
+const App = () => {
 	return (
-		<React.Fragment>
+		<GlobalState>
 			<GlobalStyle />
 			<Header />
-		</React.Fragment>
+			<JobList />
+		</GlobalState>
 	);
-}
+};
 
 export default App;
