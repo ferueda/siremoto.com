@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
-import { JobsContext } from '../context/GlobalState';
+import { JobsContext } from '../context/JobsContext';
 
 const Form = styled.form`
 	display: flex;
