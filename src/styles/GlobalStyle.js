@@ -7,24 +7,7 @@ const GlobalStyle = createGlobalStyle`
   --main-color: #08d9d6;
   --secondary-color: #eb4d4b;
   --dark-color: #252a34;
-  --light-color: #eaeaea;
-
-}
-
-${
-	'' /* .color {
-  background-color: var(--secondary-color);
-  color: #fff;
-  padding: 1rem 3rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
-  margin: 2rem auto;
-  display: block;
-} */
+  --light-color: #ecf0f1;
 }
 
 html {
