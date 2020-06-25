@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+
+import { ThemeContext } from '../context/ThemeContext';
 
 import Container from '../styles/Container';
 import HeaderSearch from './HeaderSearch';
@@ -9,8 +11,7 @@ const HeroContainer = styled(Container)`
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6)),
-		url('/assets/images/laptop-stickers-640x427.jpg');
+	background-image: ${({ theme }) => `linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.45)),url(${theme});`};
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -44,9 +45,13 @@ const Title = styled.div`
 `;
 
 const Header = () => {
+	const { light, lightBackgroundImageSrc, darkBackgroundImageSrc } = useContext(ThemeContext);
+
+	const currentTheme = light ? lightBackgroundImageSrc : darkBackgroundImageSrc;
+
 	return (
 		<header>
-			<HeroContainer>
+			<HeroContainer theme={currentTheme}>
 				<Title>
 					<h1>
 						<a href="/">siRemoto</a>
