@@ -9,7 +9,7 @@ export const jobsReducer = (state, action) => {
 		case actions.FETCH_INIT:
 			return { ...state, isLoading: true, isError: false };
 		case actions.FETCH_SUCCESS:
-			return { ...state, jobs: action.payload, isError: false, isLoading: false };
+			return { ...state, jobs: [...action.payload], isError: false, isLoading: false };
 		case actions.FETCH_ERROR:
 			return { ...state, isLoading: false, isError: true };
 		default:
