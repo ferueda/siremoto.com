@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 
 import { JobsContext } from '../context/JobsContext';
 
 import Container from '../styles/Container';
 import JobCard from './JobCard';
+import { jobsReducer } from '../context/reducers';
 
 const JobListContainer = styled(Container)`
 	text-align: center;
@@ -23,17 +24,28 @@ const H2 = styled.h2`
 `;
 
 const JobList = () => {
+	const [selected, setSelected] = useState(null);
+
 	const { jobs } = useContext(JobsContext);
 
+	const handleSelect = jobId => {
+		if (selected === jobId) {
+			setSelected(null);
+		} else {
+			setSelected(jobId);
+		}
+	};
+
 	console.log(jobs);
+
 	return (
 		<main role="main">
 			<JobListContainer>
 				<H2>
 					Últimos trabajos <span>(247)</span>
 				</H2>
-				{jobs.map(({ id, ...jobData }) => (
-					<JobCard key={id} {...jobData} />
+				{jobs.map(job => (
+					<JobCard key={job.id} {...job} isActive={job.id === selected} handleSelect={handleSelect} />
 				))}
 			</JobListContainer>
 		</main>
