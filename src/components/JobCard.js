@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import JobDescription from './JobDescription';
+import FlagIcon from './FlagIcon';
+
+import { getDateDiff } from '../utils/helpers';
+
 const CardContainer = styled.div`
 	display: grid;
 	grid-template-columns: 4rem 1fr auto;
@@ -18,6 +23,8 @@ const CardContainer = styled.div`
 	padding: 0.5rem;
 	overflow: hidden;
 	color: var(--dark-color);
+
+	background-color: ${({ isActive }) => isActive && 'var(--light-color)'};
 
 	@media (hover: hover) and (pointer: fine) {
 		&:hover {
@@ -47,25 +54,21 @@ const Job = styled.div`
 	}
 
 	h3 {
-		font-size: 0.8em;
+		font-size: 0.9em;
 		font-weight: 500;
 	}
 
 	h4 {
-		font-size: 0.8em;
+		font-size: 0.9em;
 		font-weight: 500;
-		background-color: var(--light-color);
-		border-radius: var(--border-radius-size);
-		padding: 0 0.25em;
 		text-transform: capitalize;
-		:not(:first-of-type) {
-			margin-left: 0.25em;
-		}
+		margin: auto 0;
 	}
 
 	span {
 		font-size: 0.8em;
 		font-weight: 700;
+		margin: auto 0.25em;
 	}
 `;
 
@@ -99,28 +102,46 @@ const Time = styled.p`
 	align-self: center;
 `;
 
-const JobCard = ({ company_logo, company_name, title, tags, salary, company_location }) => {
+const JobCard = ({ id, isActive, tags, salary, company_info, timestamp, apply_link, description, handleSelect }) => {
+	const { logo, name, location } = company_info;
+
+	const today = new Date();
+	const jobDate = new Date(timestamp);
+
+	const time = getDateDiff(jobDate, today);
+
 	return (
-		<CardContainer>
-			<CompanyLogo src={company_logo} alt={`${company_name} logo`} />
-			<Job>
-				<h2>{title}</h2>
-				<Company>
-					<h3>{company_name}</h3>
-					<span>&nbsp;-&nbsp;</span>
-					{company_location.map(location => (
-						<h4 key={location}>{location}</h4>
+		<React.Fragment>
+			<CardContainer isActive={isActive} onClick={() => handleSelect(id)}>
+				<CompanyLogo src={logo} alt={`${name} logo`} />
+				<Job>
+					<h2>{description.job_title}</h2>
+					<Company>
+						<h3>{name}</h3>
+
+						<span>&nbsp;&#8212;&nbsp;</span>
+
+						{location.remote ? <FlagIcon flag="remote" /> : null}
+
+						{location.city && location.country ? (
+							<>
+								<FlagIcon flag={location.country} />
+
+								<h4>{location.country}</h4>
+							</>
+						) : null}
+					</Company>
+				</Job>
+				<TagsList>
+					{tags.slice(0, 6).map(tag => (
+						<Tag key={tag}>{tag}</Tag>
 					))}
-				</Company>
-			</Job>
-			<TagsList>
-				{tags.map(tag => (
-					<Tag key={tag}>{tag}</Tag>
-				))}
-			</TagsList>
-			<Salary>{salary}</Salary>
-			<Time>Hoy</Time>
-		</CardContainer>
+				</TagsList>
+				<Salary>{salary}</Salary>
+				<Time>{time !== 0 ? `${time}d` : 'hoy'}</Time>
+			</CardContainer>
+			{isActive && <JobDescription apply={apply_link} company={company_info} description={description} />}
+		</React.Fragment>
 	);
 };
 
