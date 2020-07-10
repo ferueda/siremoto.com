@@ -5,11 +5,15 @@ import { JobsContext } from '../context/JobsContext';
 
 import Container from '../styles/Container';
 import JobCard from './JobCard';
-import { jobsReducer } from '../context/reducers';
 
 const JobListContainer = styled(Container)`
 	text-align: center;
 	padding: 0;
+
+	@media screen and (min-width: 1000px) {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
 `;
 
 const H2 = styled.h2`
@@ -20,6 +24,11 @@ const H2 = styled.h2`
 	span {
 		font-weight: normal;
 		color: #7f8c8d;
+	}
+
+	@media screen and (min-width: 768px) {
+		font-size: 1.65rem;
+		margin: 1.5rem auto;
 	}
 `;
 
@@ -36,7 +45,7 @@ const JobList = () => {
 		}
 	};
 
-	console.log(jobs);
+	console.log('JobList');
 
 	return (
 		<main role="main">
