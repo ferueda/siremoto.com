@@ -16,6 +16,10 @@ const Input = styled.input`
 	padding-left: 1rem;
 	border-top-left-radius: var(--border-radius-size);
 	border-bottom-left-radius: var(--border-radius-size);
+	@media screen and (min-width: 1024px) {
+		height: 4rem;
+		font-size: 1.65rem;
+	}
 `;
 
 const SearchButton = styled.button`
@@ -27,6 +31,11 @@ const SearchButton = styled.button`
 	border: none;
 	width: 3.5rem;
 	height: 3.5rem;
+
+	@media screen and (min-width: 1024px) {
+		height: 4rem;
+		width: 4rem;
+	}
 `;
 
 const HeaderSearch = ({ placeholder = 'Buscar trabajos' }) => {
