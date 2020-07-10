@@ -42,12 +42,34 @@ const Title = styled.div`
 	}
 
 	text-align: center;
+
+	@media screen and (min-width: 768px) {
+		h1 {
+			font-size: 4.5rem;
+		}
+
+		h2 {
+			font-size: 1.35rem;
+		}
+	}
+
+	@media screen and (min-width: 1024px) {
+		h1 {
+			font-size: 5rem;
+		}
+
+		h2 {
+			font-size: 1.5rem;
+		}
+	}
 `;
 
 const Header = () => {
 	const { light, lightBackgroundImageSrc, darkBackgroundImageSrc } = useContext(ThemeContext);
 
 	const currentTheme = light ? lightBackgroundImageSrc : darkBackgroundImageSrc;
+
+	console.log('Header');
 
 	return (
 		<header>
