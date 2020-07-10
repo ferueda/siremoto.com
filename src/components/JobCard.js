@@ -17,7 +17,7 @@ const CardContainer = styled.div`
 	row-gap: 0.25rem;
 
 	:not(:last-child) {
-		border-bottom: 2px solid var(--light-color);
+		border-bottom: 1px solid var(--light-color);
 	}
 
 	padding: 0.5rem;
@@ -25,6 +25,18 @@ const CardContainer = styled.div`
 	color: var(--dark-color);
 
 	background-color: ${({ isActive }) => isActive && 'var(--light-color)'};
+
+	@media screen and (min-width: 768px) {
+		grid-template-columns: 4rem 1fr 1fr auto;
+		grid-template-rows: auto;
+		grid-template-areas:
+			'Logo Job Salary Time'
+			'Logo Job Tags Time';
+
+		gap: 1rem;
+		row-gap: 0.25rem;
+		padding: 1rem;
+	}
 
 	@media (hover: hover) and (pointer: fine) {
 		&:hover {
@@ -70,6 +82,23 @@ const Job = styled.div`
 		font-weight: 700;
 		margin: auto 0.25em;
 	}
+
+	@media screen and (min-width: 768px) {
+		justify-content: center;
+		font-size: 1.25rem;
+
+		h3 {
+			font-size: 0.8em;
+		}
+
+		h4 {
+			font-size: 0.8em;
+		}
+
+		span {
+			font-weight: 500;
+		}
+	}
 `;
 
 const Company = styled.div`
@@ -80,6 +109,10 @@ const TagsList = styled.ul`
 	grid-area: Tags;
 	display: flex;
 	flex-wrap: wrap-reverse;
+	@media screen and (min-width: 768px) {
+		justify-content: center;
+		align-items: center;
+	}
 `;
 
 const Tag = styled.li`
@@ -90,16 +123,42 @@ const Tag = styled.li`
 	margin: 0.1rem;
 	padding: 0 0.2rem;
 	font-weight: 500;
+	max-height: 20px;
+
+	@media screen and (min-width: 768px) {
+		justify-content: center;
+		align-items: center;
+	}
+
+	@media screen and (min-width: 1000px) {
+		max-height: 25px;
+		font-size: 0.85rem;
+		margin: 0.2rem;
+		padding: 0.05rem 0.35rem;
+	}
 `;
 
 const Salary = styled.p`
+	grid-area: Salary;
 	display: none;
+	font-size: 1rem;
+
+	@media screen and (min-width: 768px) {
+		display: flex;
+		font-weight: 600;
+		justify-content: center;
+		align-items: center;
+	}
 `;
 
 const Time = styled.p`
 	grid-area: Time;
 	font-size: 0.9rem;
 	align-self: center;
+
+	@media screen and (min-width: 768px) {
+		font-size: 1rem;
+	}
 `;
 
 const JobCard = ({ id, isActive, tags, salary, company_info, timestamp, apply_link, description, handleSelect }) => {
