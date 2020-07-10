@@ -17,15 +17,19 @@ const JobsContextProvider = ({ children }) => {
 		console.log(search);
 	};
 
-	const contextObject = {
-		jobs,
-		dispatchFetchJobs,
-		isLoading,
-		isError,
-		handleSearch,
-	};
+	const contextObject = React.useMemo(() => {
+		return {
+			jobs,
+			dispatchFetchJobs,
+			isLoading,
+			isError,
+			handleSearch,
+		};
+	}, [jobs, dispatchFetchJobs, isLoading, isError]);
+
+	console.log('JobsContext');
 
 	return <JobsContext.Provider value={{ ...contextObject }}>{children}</JobsContext.Provider>;
 };
 
-export default JobsContextProvider;
+export default React.memo(JobsContextProvider);
