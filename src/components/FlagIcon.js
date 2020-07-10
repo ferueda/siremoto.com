@@ -5,6 +5,12 @@ const StyledImg = styled.img`
 	width: 15px;
 	height: 15px;
 	margin: auto 0.25em auto 0;
+
+	@media screen and (min-width: 768px) {
+		width: 20px;
+		height: 20px;
+		margin: auto 0.35em auto 0;
+	}
 `;
 
 const country = {
